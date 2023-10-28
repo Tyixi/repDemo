@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-          runs-on: ubuntu-18.04       #指定运行环境
+    runs-on: ubuntu-18.04       #指定运行环境
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
