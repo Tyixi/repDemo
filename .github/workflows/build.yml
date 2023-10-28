@@ -1,0 +1,20 @@
+name: Build and Run
+
+on:
+  push:
+    branches:
+      - main    #只有main分支发生push事件时，才会触发 workflow
+
+jobs:
+  build:
+          runs-on: ubuntu-18.04       #指定运行环境
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Build and run Docker container
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+          ./script.sh
