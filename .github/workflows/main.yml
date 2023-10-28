@@ -1,0 +1,22 @@
+name: Docker Build and Run
+
+on:
+  push:
+    branches:
+      - main            #只有main分支发生push事件时，才会触发 workflow
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04       #指定运行环境
+
+    steps:              #指定每个 Job 的运行步骤
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Docker
+        uses: docker/setup-docker@v1
+
+      - name: Build Docker image
+        run: |
+          chmod +x script.sh
+          ./script.sh
